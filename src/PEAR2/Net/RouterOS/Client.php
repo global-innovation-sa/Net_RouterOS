@@ -289,13 +289,7 @@ class Client
         $request->send($com);
         $response = new Response($com, false, $timeout);
         $request->setArgument('name', $username);
-        $request->setArgument(
-            'response',
-            '00' . md5(
-                chr(0) . $password
-                . pack('H*', $response->getProperty('ret'))
-            )
-        );
+        $request->setArgument('password', $password);
         $request->verify($com)->send($com);
 
         $response = new Response($com, false, $timeout);
